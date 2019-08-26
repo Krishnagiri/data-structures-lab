@@ -1,45 +1,58 @@
-#include<conio.h>
+
 #include<stdio.h>
-#define stack_size 50
-void push(int[],int *);
-void pop(int[],int *);
+# define max 3
+int stack[max];
+void pop(int *top);
+void push(int item,int *top);
 int main()
 {
-   int stack[stack_size],ch,top=-1;
-   do{
-       printf("enter 1 to push\n");
-       printf("enter 2 to pop\n");
-       scanf("%d",&ch);
-       switch(ch) {
-	  case 1: push(stack,&top);
-		  break;
-	  case 2: pop(stack,&top);
-		  break;
-	}
-    }while(ch==1||ch==2);
-    return 0;
- }
+int top=-1,choice,i,item;
 
- void push(int stack[stack_size],int *top) {
-    int item;
-    if(*top==stack_size) {
-       printf("stack overflow\n");
-    }
-else {
-    printf("enter the element\n");
-    scanf("%d",&item);
-    stack[++(*top)]=item;
-    printf("this %d is pushed\n",item);
+do
+{
+printf("Enter 1 for push \nEnter 2 for pop \nEnter 3 for Display ");
+scanf("%d",&choice);
+switch(choice)
+{
+case 1:{printf("Enter the element ");
+	scanf("%d",&item);
+	push(item,&top);
+	break;
+	}
+case 2:{pop(&top);
+	break;
+	}
+
+case 3:{if(top==-1)
+	printf("Stack is empty\n");
+	else
+	{printf("Stack elements are	");
+	for(i=top;i>=0;i--)
+	printf("%d\t",stack[i]);
+	}
+	break;
+	}
 }
+}while(choice==1||choice==2||choice==3);
+
+return 0;
+
 }
-void pop(int stack[stack_size],int *top) {
-    int item;
-    if(*top==-1) {
-       printf("stack underflow\n");
-    }
-else {
-    item=stack[*top];
-    (*top)--;
-    printf("the popped element is %d\n",item);
+
+
+void pop(int *top)
+{
+if(*top==-1)
+printf("Stack underflow\n");
+else
+*top=*top-1;
+}
+void push(int item,int *top)
+{
+if(*top==max)
+printf("Stack overflow\n");
+else
+{*top=*top+1;
+ stack[*top]=item;
 }
 }
